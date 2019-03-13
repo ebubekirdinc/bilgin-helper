@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28606.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilginHelper", "BilginHelper\BilginHelper.csproj", "{9413E39F-F963-403B-9473-9721321A410F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9413E39F-F963-403B-9473-9721321A410F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9413E39F-F963-403B-9473-9721321A410F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9413E39F-F963-403B-9473-9721321A410F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9413E39F-F963-403B-9473-9721321A410F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FFEEF8D8-3D0E-4F37-9A02-52C51FB8A1DE}
+	EndGlobalSection
+EndGlobal
