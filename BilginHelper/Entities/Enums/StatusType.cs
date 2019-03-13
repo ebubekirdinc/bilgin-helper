@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BilginHelper.Entities.Enums
 {
-    enum StatusType : byte
+    public enum StatusType : byte
     {
         New = 1,
         Modified = 2,
