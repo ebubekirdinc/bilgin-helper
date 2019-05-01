@@ -1,4 +1,5 @@
 ﻿using BilginHelper.DataAccess.Abstract;
+using BilginHelper.DataAccess.Abstract.Dapper;
 using BilginHelper.Entities.Abstract;
 using Dapper;
 using System;
@@ -10,7 +11,9 @@ using System.Text;
 
 namespace BilginHelper.DataAccess.Concrete.Dapper
 {
-    public class DapperRepositoryBase<TEntity> : IEntityRepository<TEntity> where TEntity : class, IEntity, new()
+    public class DapperRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
+        where TEntity : class, IEntity, new()
+        where TContext : IDapperContext, new()
     {
         private const string ConnectionString = "SERVER=.;DATABASE=DBName;Trusted_Connection=true;";
         private SqlConnection connection = new SqlConnection(ConnectionString);
@@ -19,7 +22,10 @@ namespace BilginHelper.DataAccess.Concrete.Dapper
 
         public TEntity Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            using (TContext context = new TContext())
+            {
+                return context.Set<TEntity>().Add(entity);
+            }
         }
 
         public int Count(Expression<Func<TEntity, bool>> filter = null)

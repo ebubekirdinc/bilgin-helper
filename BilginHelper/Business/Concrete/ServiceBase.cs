@@ -16,32 +16,32 @@ namespace BilginHelper.Business.Concrete
             _dataAccessBase = dataAccessBase;
         }
 
-        public T Add(T entity)
+        public virtual T Add(T entity)
         {
             return _dataAccessBase.Add(entity);
         }
 
-        public int Count(Expression<Func<T, bool>> filter = null)
+        public virtual int Count(Expression<Func<T, bool>> filter = null)
         {
             return _dataAccessBase.Count(filter);
         }
 
-        public int Delete(T entity)
+        public virtual int Delete(T entity)
         {
             return _dataAccessBase.Delete(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filter)
+        public virtual T Get(Expression<Func<T, bool>> filter)
         {
             return _dataAccessBase.Get(filter);
         }
 
-        public List<T> GetAll(Expression<Func<T, bool>> filter = null)
+        public virtual List<T> GetAll(Expression<Func<T, bool>> filter = null)
         {
             return _dataAccessBase.GetAll(filter);
         }
 
-        public T Update(T entity)
+        public virtual T Update(T entity)
         {
             return _dataAccessBase.Update(entity);
         }
