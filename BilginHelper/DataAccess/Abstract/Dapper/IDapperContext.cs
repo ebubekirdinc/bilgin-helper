@@ -8,6 +8,6 @@ namespace BilginHelper.DataAccess.Abstract.Dapper
 {
     public interface IDapperContext : IDisposable
     {
-        DapperEntitySet<TEntity> Set<TEntity>() where TEntity : class, IEntity, new();
+        DapperSet<TEntity> Set<TEntity>() where TEntity : class, IEntity, new();
     }
 }

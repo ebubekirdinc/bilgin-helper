@@ -13,14 +13,9 @@ namespace BilginHelper.DataAccess.Concrete.Dapper
 {
     public class DapperRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
         where TEntity : class, IEntity, new()
-        where TContext : IDapperContext, new()
+        where TContext : DapperContext, new()
     {
-        private const string ConnectionString = "SERVER=.;DATABASE=DBName;Trusted_Connection=true;";
-        private SqlConnection connection = new SqlConnection(ConnectionString);
-
-        private const string SELECT_QUERY = "SELECT * FROM {0}";
-
-        public TEntity Add(TEntity entity)
+        public virtual TEntity Add(TEntity entity)
         {
             using (TContext context = new TContext())
             {
@@ -28,37 +23,49 @@ namespace BilginHelper.DataAccess.Concrete.Dapper
             }
         }
 
-        public int Count(Expression<Func<TEntity, bool>> filter = null)
+        public virtual int Count(Expression<Func<TEntity, bool>> filter = null)
         {
-            throw new NotImplementedException();
-        }
-
-        public int Delete(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TEntity Get(Expression<Func<TEntity, bool>> filter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
-        {
-            if (filter == null)
+            using (TContext context = new TContext())
             {
-                return connection.Query<TEntity>("").ToList();
-            }
-            else
-            {
-                //TODO : Lambda expression to sql query code
-                return null;
+                return filter == null
+                    ? context.Set<TEntity>().Count()
+                    : context.Set<TEntity>().Count(filter);
             }
         }
 
-        public TEntity Update(TEntity entity)
+        public virtual int Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            using (TContext context = new TContext())
+            {
+                return context.Set<TEntity>().Delete(entity);
+            }
+        }
+
+        public virtual TEntity Get(Expression<Func<TEntity, bool>> filter)
+        {
+            using (TContext context = new TContext())
+            {
+                return context.Set<TEntity>().Get(filter);
+            }
+        }
+
+        public virtual List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
+        {
+            using (TContext context = new TContext())
+            {
+                return filter == null
+                    ? context.Set<TEntity>().GetAll()
+                    : context.Set<TEntity>().GetAll(filter);
+            }
+
+        }
+
+        public virtual TEntity Update(TEntity entity)
+        {
+            using (TContext context = new TContext())
+            {
+                return context.Set<TEntity>().Update(entity);
+            }
         }
     }
 }

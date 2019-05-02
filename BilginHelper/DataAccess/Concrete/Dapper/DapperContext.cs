@@ -8,15 +8,13 @@ namespace BilginHelper.DataAccess.Concrete.Dapper
 {
     public class DapperContext : IDapperContext
     {
-
-        public virtual DapperEntitySet<TEntity> Set<TEntity>() where TEntity : class, IEntity, new()
+        private string sqlConn;
+        public DapperContext(string sqlConnection)
         {
-            return new DapperEntitySet<TEntity>();
+            sqlConn = sqlConnection;
         }
+        public virtual DapperSet<TEntity> Set<TEntity>() where TEntity : class, IEntity, new() => new DapperSet<TEntity>(sqlConn);
 
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
+        public void Dispose() => GC.SuppressFinalize(this);
     }
 }

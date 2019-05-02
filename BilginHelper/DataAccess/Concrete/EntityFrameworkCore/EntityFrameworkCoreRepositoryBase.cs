@@ -14,7 +14,7 @@ namespace BilginHelper.DataAccess.Concrete.EntityFrameworkCore
         where TEntity : class, IEntity, new()
         where TContext : DbContext, new()
     {
-        public TEntity Add(TEntity entity)
+        public virtual TEntity Add(TEntity entity)
         {
             using (TContext context = new TContext())
             {
@@ -25,7 +25,7 @@ namespace BilginHelper.DataAccess.Concrete.EntityFrameworkCore
             }
         }
 
-        public int Count(Expression<Func<TEntity, bool>> filter = null)
+        public virtual int Count(Expression<Func<TEntity, bool>> filter = null)
         {
             using (TContext context = new TContext())
             {
@@ -35,7 +35,7 @@ namespace BilginHelper.DataAccess.Concrete.EntityFrameworkCore
             }
         }
 
-        public int Delete(TEntity entity)
+        public virtual int Delete(TEntity entity)
         {
             using (TContext context = new TContext())
             {
@@ -45,7 +45,7 @@ namespace BilginHelper.DataAccess.Concrete.EntityFrameworkCore
             }
         }
 
-        public TEntity Get(Expression<Func<TEntity, bool>> filter)
+        public virtual TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
             using (TContext context = new TContext())
             {
@@ -53,7 +53,7 @@ namespace BilginHelper.DataAccess.Concrete.EntityFrameworkCore
             }
         }
 
-        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
+        public virtual List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
             using (TContext context = new TContext())
             {
@@ -63,7 +63,7 @@ namespace BilginHelper.DataAccess.Concrete.EntityFrameworkCore
             }
         }
 
-        public TEntity Update(TEntity entity)
+        public virtual TEntity Update(TEntity entity)
         {
             using (TContext context = new TContext())
             {
