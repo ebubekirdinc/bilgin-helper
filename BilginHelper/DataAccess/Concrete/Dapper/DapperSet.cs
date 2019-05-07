@@ -35,16 +35,16 @@ namespace BilginHelper.DataAccess.Concrete.Dapper
         public TEntity Update(TEntity entity)
         {
             var properties = typeof(TEntity).GetProperties();
-
+            
             foreach (PropertyInfo property in properties)
             {
-                var attribute = Attribute.GetCustomAttribute(property, typeof(KeyAttribute)) as KeyAttribute;
 
-                if (attribute != null)
+                if (Attribute.GetCustomAttribute(property, typeof(KeyAttribute)) is KeyAttribute attribute)
                 {
-                    connection.Execute($"{string.Format(UPDATE_QUERY,"")} WHERE {property.Name} = @{property.Name}", entity);
+                    connection.Execute($"{string.Format(UPDATE_QUERY, "")} WHERE {property.Name} = @{property.Name}", entity);
 
                 }
+
                 if (property.Name == "Id")
                 {
                     connection.Execute($"{string.Format(UPDATE_QUERY, "")} WHERE {property.Name} = @{property.Name}", entity);
