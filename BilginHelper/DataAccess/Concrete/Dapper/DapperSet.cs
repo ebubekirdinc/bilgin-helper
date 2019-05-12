@@ -16,8 +16,9 @@ namespace BilginHelper.DataAccess.Concrete.Dapper
     {
 
         private SqlConnection connection;
+        private string TableName;
 
-        private string INSERT_QUERY = $"INSERT INTO {typeof(TEntity).Name} ({1}) VALUES ({2})";
+        private string INSERT_QUERY = $"INSERT INTO {typeof(TEntity).Name} ({{0}}) VALUES ({{1}})";
         private string UPDATE_QUERY = $"UPDATE {typeof(TEntity).Name} SET {1}";
         private string DELETE_QUERY = $"DELETE FROM {typeof(TEntity).Name}";
         private string SELECT_QUERY = $"SELECT * FROM {typeof(TEntity).Name}";
@@ -27,15 +28,42 @@ namespace BilginHelper.DataAccess.Concrete.Dapper
         public DapperSet(string sqlConnection)
         {
             connection = new SqlConnection(sqlConnection);
+            TableName = typeof(TEntity).Name;
         }
+
         public TEntity Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            var properties = typeof(TEntity).GetProperties();
+            string insertColums = "", parameterList = "", selectQuery = "";
+            foreach (PropertyInfo property in properties)
+            {
+                if (Attribute.GetCustomAttribute(property, typeof(KeyAttribute)) is KeyAttribute attribute)
+                {
+                    selectQuery = $"SELECT * FROM {TableName} WHERE {property.Name} = @@IDENTITY";
+                }
+                else if (property.Name == "Id")
+                {
+                    selectQuery = $"SELECT TOP 1 * FROM {TableName} WHERE Id = @@IDENTITY";
+                }
+                else if (property.Name == TableName + "Id")
+                {
+                    selectQuery = $"SELECT * FROM {TableName} WHERE {TableName + "Id"} = @@IDENTITY";
+                }
+                else
+                {
+                    insertColums += $"{property.Name},";
+                    parameterList += $"@{property.Name},";
+                }
+
+            }
+            insertColums = insertColums.TrimEnd(',');
+            parameterList = parameterList.TrimEnd(',');
+            return connection.QueryFirstOrDefault<TEntity>(string.Format(INSERT_QUERY, insertColums, parameterList) + $" {selectQuery}", entity);
         }
         public TEntity Update(TEntity entity)
         {
             var properties = typeof(TEntity).GetProperties();
-            
+
             foreach (PropertyInfo property in properties)
             {
 
@@ -57,7 +85,6 @@ namespace BilginHelper.DataAccess.Concrete.Dapper
 
             return entity;
         }
-
         public int Delete(TEntity entity)
         {
             var properties = typeof(TEntity).GetProperties();
@@ -75,16 +102,15 @@ namespace BilginHelper.DataAccess.Concrete.Dapper
                 {
                     return connection.Execute($"{DELETE_QUERY} WHERE Id = @Id", entity);
                 }
-                else if (property.Name == typeof(TEntity).Name + "Id")
+                else if (property.Name == TableName + "Id")
                 {
-                    return connection.Execute($"{DELETE_QUERY} WHERE {typeof(TEntity).Name}Id = @{typeof(TEntity).Name}Id", entity);
+                    return connection.Execute($"{DELETE_QUERY} WHERE {TableName}Id = @{TableName}Id", entity);
                 }
             }
 
             return -1;
 
         }
-
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
             LambdaBuilder lambdaBuilder = new LambdaBuilder();
@@ -118,6 +144,14 @@ namespace BilginHelper.DataAccess.Concrete.Dapper
             }
         }
 
+        public global::Bilgin.Test.Entities.Category Add(global::Bilgin.Test.Entities.Category cat)
+        {
+            throw new NotImplementedException();
+        }
 
+        public global::Entities.Category Add(global::Entities.Category cat)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,9 +1,10 @@
-﻿using BilginHelper.Entities.Abstract;
+﻿using BilginHelper.DataAccess.Concrete.Dapper;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BilginHelper.DataAccess.Concrete.Dapper
+namespace Bilgin.Test.DAL
 {
     public class BerkayContext : DapperContext
     {
@@ -12,10 +13,5 @@ namespace BilginHelper.DataAccess.Concrete.Dapper
 
         }
         public DapperSet<Category> Categories { get; set; }
-    }
-
-    public class Category : IEntity
-    {
-
     }
 }

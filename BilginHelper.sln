@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.28606.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BilginHelper", "BilginHelper\BilginHelper.csproj", "{9413E39F-F963-403B-9473-9721321A410F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bilgin.Test", "Bilgin.Test\Bilgin.Test.csproj", "{388DE064-52C8-46CF-BC33-69C7769D5921}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{2EA60DF2-2CC4-428F-8519-2FFCBF036198}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{9413E39F-F963-403B-9473-9721321A410F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9413E39F-F963-403B-9473-9721321A410F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9413E39F-F963-403B-9473-9721321A410F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{388DE064-52C8-46CF-BC33-69C7769D5921}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{388DE064-52C8-46CF-BC33-69C7769D5921}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{388DE064-52C8-46CF-BC33-69C7769D5921}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{388DE064-52C8-46CF-BC33-69C7769D5921}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EA60DF2-2CC4-428F-8519-2FFCBF036198}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EA60DF2-2CC4-428F-8519-2FFCBF036198}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EA60DF2-2CC4-428F-8519-2FFCBF036198}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EA60DF2-2CC4-428F-8519-2FFCBF036198}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
