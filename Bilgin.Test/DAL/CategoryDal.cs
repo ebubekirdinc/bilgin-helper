@@ -11,7 +11,7 @@ namespace Bilgin.Test.DAL
         public Category Add(Category cat)
         {
             BerkayContext context = new BerkayContext();
-            return context.Categories.Add(cat);
+            return context.Set<Category>().Add(cat);
         }
     }
 }

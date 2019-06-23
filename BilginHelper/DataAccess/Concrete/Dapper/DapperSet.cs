@@ -143,15 +143,5 @@ namespace BilginHelper.DataAccess.Concrete.Dapper
                 return connection.ExecuteScalar<int>($"{COUNT_QUERY} WHERE {query.Sql}", query.Parameters);
             }
         }
-
-        public global::Bilgin.Test.Entities.Category Add(global::Bilgin.Test.Entities.Category cat)
-        {
-            throw new NotImplementedException();
-        }
-
-        public global::Entities.Category Add(global::Entities.Category cat)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
